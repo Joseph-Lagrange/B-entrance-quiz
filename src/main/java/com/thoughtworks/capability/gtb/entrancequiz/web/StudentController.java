@@ -34,7 +34,7 @@ public class StudentController {
         studentService.save(request.getName());
     }
 
-    @GetMapping("/products")
+    @GetMapping("/students")
     @ResponseStatus(HttpStatus.OK)
     public GetStudentsResponse getStudents() {
         List<Student> students = studentService.findAll();
@@ -43,7 +43,7 @@ public class StudentController {
                 .build();
     }
 
-    @PostMapping("/student/divide")
+    @GetMapping("/student/divide")
     @ResponseStatus(HttpStatus.OK)
     public DivideStudentsResponse divideStudents() {
         List<Student> students = studentService.findAll();
