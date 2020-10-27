@@ -3,6 +3,8 @@ package com.thoughtworks.capability.gtb.entrancequiz.service;
 import com.thoughtworks.capability.gtb.entrancequiz.domain.Student;
 import com.thoughtworks.capability.gtb.entrancequiz.repository.StudentRepository;
 
+import java.util.List;
+
 /**
  * Created by wudibin
  * 2020/10/27
@@ -20,5 +22,9 @@ public class StudentService {
                 .name(name)
                 .build();
         studentRepository.save(student);
+    }
+
+    public List<Student> findAll() {
+        return studentRepository.findAll();
     }
 }
