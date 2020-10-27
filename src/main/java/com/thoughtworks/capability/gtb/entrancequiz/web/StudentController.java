@@ -49,7 +49,8 @@ public class StudentController {
     public DivideStudentsResponse divideStudents() {
         List<Student> students = studentService.findAll();
         if (students.isEmpty()) {
-            throw new BadRequestException(ErrorCode.STUDENTS_IS_EMPTY);
+            students = studentService.addData2DB();
+            //throw new BadRequestException(ErrorCode.STUDENTS_IS_EMPTY);
         }
         int sequence = 1;
         TreeMap<Integer, List<Student>> group = Maps.newTreeMap();
