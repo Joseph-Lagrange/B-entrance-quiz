@@ -55,4 +55,16 @@ public class StudentControllerTest {
         assertEquals(1, studentRepository.findAll().size());
     }
 
+    @Test
+    @Order(2)
+    public void should_get_students_when_param_correct() throws Exception {
+        studentRepository.save(Student.builder()
+                .name("鲁班七号")
+                .build());
+        mockMvc.perform(get("/students")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.students", hasSize(1)));
+    }
+
 }
