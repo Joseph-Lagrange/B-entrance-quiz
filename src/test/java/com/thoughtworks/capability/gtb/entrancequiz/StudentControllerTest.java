@@ -67,4 +67,12 @@ public class StudentControllerTest {
                 .andExpect(jsonPath("$.students", hasSize(1)));
     }
 
+    @Test
+    @Order(3)
+    public void should_not_divide_students_when_students_empty() throws Exception {
+        mockMvc.perform(get("/student/divide")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
 }
