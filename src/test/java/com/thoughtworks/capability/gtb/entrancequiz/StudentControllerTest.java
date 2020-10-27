@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -64,7 +65,8 @@ public class StudentControllerTest {
         mockMvc.perform(get("/students")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.students", hasSize(1)));
+                .andExpect(jsonPath("$.students", hasSize(1)))
+                .andExpect(jsonPath("$.students[0].name", is("鲁班七号")));
     }
 
     @Test
@@ -73,6 +75,17 @@ public class StudentControllerTest {
         mockMvc.perform(get("/student/divide")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    @Order(4)
+    public void should_divide_students_when_students_not_empty() throws Exception {
+        studentRepository.save(Student.builder()
+                .name("鲁班七号")
+                .build());
+        mockMvc.perform(get("/student/divide")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 
 }
