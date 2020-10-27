@@ -7,13 +7,11 @@ import com.thoughtworks.capability.gtb.entrancequiz.common.exceptions.BadRequest
 import com.thoughtworks.capability.gtb.entrancequiz.domain.Student;
 import com.thoughtworks.capability.gtb.entrancequiz.model.addStudent.AddStudentRequest;
 import com.thoughtworks.capability.gtb.entrancequiz.model.divideStudents.DivideStudentsResponse;
+import com.thoughtworks.capability.gtb.entrancequiz.model.getStudents.GetStudentsResponse;
 import com.thoughtworks.capability.gtb.entrancequiz.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Collections;
@@ -34,6 +32,15 @@ public class StudentController {
     @ResponseStatus(HttpStatus.CREATED)
     public void addStudent(@RequestBody @Valid AddStudentRequest request) {
         studentService.save(request.getName());
+    }
+
+    @GetMapping("/products")
+    @ResponseStatus(HttpStatus.OK)
+    public GetStudentsResponse getStudents() {
+        List<Student> students = studentService.findAll();
+        return GetStudentsResponse.builder()
+                .students(students)
+                .build();
     }
 
     @PostMapping("/student/divide")
