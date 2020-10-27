@@ -2,6 +2,7 @@ package com.thoughtworks.capability.gtb.entrancequiz.web;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.thoughtworks.capability.gtb.entrancequiz.common.constant.Constant;
 import com.thoughtworks.capability.gtb.entrancequiz.common.errors.ErrorCode;
 import com.thoughtworks.capability.gtb.entrancequiz.common.exceptions.BadRequestException;
 import com.thoughtworks.capability.gtb.entrancequiz.domain.Student;
@@ -54,7 +55,7 @@ public class StudentController {
         TreeMap<Integer, List<Student>> group = Maps.newTreeMap();
         Collections.shuffle(students);
         for (Student s : students) {
-            if (sequence % 7 == 0) {
+            if (sequence % Constant.GROUP_NUMBER == 0) {
                 sequence = 1;
             }
             if (!group.containsKey(sequence)) {
