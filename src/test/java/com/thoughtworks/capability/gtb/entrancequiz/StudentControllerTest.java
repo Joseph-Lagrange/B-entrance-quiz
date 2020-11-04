@@ -1,3 +1,4 @@
+// TODO GTB-测试: - 被测试类的包路径应保持和测试类一致
 package com.thoughtworks.capability.gtb.entrancequiz;
 
 import com.fasterxml.jackson.databind.ObjectMapper;

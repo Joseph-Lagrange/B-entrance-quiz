@@ -16,6 +16,7 @@ import org.springframework.web.filter.CorsFilter;
 @Configuration
 public class CorsConfig {
 
+    // TODO GTB-工程实践: - Config类不需要StudentRepository
     @Autowired
     StudentRepository studentRepository;
 
